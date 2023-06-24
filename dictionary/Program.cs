@@ -169,6 +169,24 @@ class Program
         }
     }
 
+    static void ReplaceTranslation()
+    {
+        if (currentDictionary == null)
+        {
+            Console.WriteLine("No dictionary selected. Please select a dictionary first.");
+            return;
+        }
+
+        Console.Write("Enter word: ");
+        string word = Console.ReadLine();
+        Console.Write("Enter new translation: ");
+        string translation = Console.ReadLine();
+
+        currentDictionary.ReplaceTranslation(word, translation);
+
+        Console.WriteLine("Translation replaced.");
+    }
+
     static void CreateDictionary()
     {
         Console.Write("Enter dictionary name: ");
@@ -203,57 +221,20 @@ class Program
         }
     }
 
-    static void AddTranslation()
+
+    static void ImportDictionary()
     {
-        if (currentDictionary == null)
-        {
-            Console.WriteLine("No dictionary selected. Please select a dictionary first.");
-            return;
-        }
+        Console.Write("Enter file name to import from: ");
+        string fileName = Console.ReadLine();
 
-        Console.Write("Enter word: ");
-        string word = Console.ReadLine();
-        Console.Write("Enter translation: ");
-        string translation = Console.ReadLine();
+        Dictionary dictionary = new Dictionary("Imported Dictionary", fileName);
+        dictionary.ImportFromFile(fileName);
 
-        currentDictionary.AddTranslation(word, translation);
+        dictionaries.Add(dictionary);
 
-        Console.WriteLine("Translation added.");
+        Console.WriteLine("Dictionary imported.");
     }
 
-    static void ReplaceTranslation()
-    {
-        if (currentDictionary == null)
-        {
-            Console.WriteLine("No dictionary selected. Please select a dictionary first.");
-            return;
-        }
-
-        Console.Write("Enter word: ");
-        string word = Console.ReadLine();
-        Console.Write("Enter new translation: ");
-        string translation = Console.ReadLine();
-
-        currentDictionary.ReplaceTranslation(word, translation);
-
-        Console.WriteLine("Translation replaced.");
-    }
-
-    static void RemoveTranslation()
-    {
-        if (currentDictionary == null)
-        {
-            Console.WriteLine("No dictionary selected. Please select a dictionary first.");
-            return;
-        }
-
-        Console.Write("Enter word: ");
-        string word = Console.ReadLine();
-
-        currentDictionary.RemoveTranslation(word);
-
-        Console.WriteLine("Translation removed.");
-    }
 
     static void FindTranslation()
     {
@@ -278,6 +259,46 @@ class Program
         }
     }
 
+
+
+    static void AddTranslation()
+    {
+        if (currentDictionary == null)
+        {
+            Console.WriteLine("No dictionary selected. Please select a dictionary first.");
+            return;
+        }
+
+        Console.Write("Enter word: ");
+        string word = Console.ReadLine();
+        Console.Write("Enter translation: ");
+        string translation = Console.ReadLine();
+
+        currentDictionary.AddTranslation(word, translation);
+
+        Console.WriteLine("Translation added.");
+    }
+
+   
+
+    static void RemoveTranslation()
+    {
+        if (currentDictionary == null)
+        {
+            Console.WriteLine("No dictionary selected. Please select a dictionary first.");
+            return;
+        }
+
+        Console.Write("Enter word: ");
+        string word = Console.ReadLine();
+
+        currentDictionary.RemoveTranslation(word);
+
+        Console.WriteLine("Translation removed.");
+    }
+
+  
+
     static void ExportDictionary()
     {
         if (currentDictionary == null)
@@ -293,17 +314,5 @@ class Program
 
         Console.WriteLine("Dictionary exported.");
     }
-
-    static void ImportDictionary()
-    {
-        Console.Write("Enter file name to import from: ");
-        string fileName = Console.ReadLine();
-
-        Dictionary dictionary = new Dictionary("Imported Dictionary", fileName);
-        dictionary.ImportFromFile(fileName);
-
-        dictionaries.Add(dictionary);
-
-        Console.WriteLine("Dictionary imported.");
-    }
+  
 }
